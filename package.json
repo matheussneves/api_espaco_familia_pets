@@ -1,9 +1,10 @@
 {
   "name": "api-facul",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "run index.js",
   "scripts": {
-    "start": "index.js"},
+    "start": "nodemon index.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
