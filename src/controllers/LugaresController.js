@@ -17,8 +17,7 @@ class TaskController {
 
     listarLugares(request, response) {
        // SELECT A.Nome, A.`Tipo De Lugar`,A.Endereço,A.`Aceita Crianças`,A.`Aceita pets`,A.`Espaço Pets`,A.`Espaço Kids`,A.`Banheiro trocador`,A.`Horario de funcionamento`,A.Instagram,A.Avaliação, B.url FROM novoevento_familia_pets.lugar A INNER JOIN novoevento_familia_pets.fotos B  ON A.id = B.id_lugares;
-    database.execute()
-    select("*").table("lugar").innerJoin.then(lugares => {
+    database.select("*").table("lugar").then(lugares => {
         console.log(lugares);
         response.json(lugares);
     }).catch(error => {
