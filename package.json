@@ -1,0 +1,18 @@
+{
+  "name": "api-facul",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "index.js"},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "knex": "^3.1.0",
+    "mysql2": "^3.9.7",
+    "nodemon": "^3.1.0"
+  }
+}
