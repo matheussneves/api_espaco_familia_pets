@@ -3,14 +3,14 @@ const express = require ('express')
 const router = express.Router()
 const TaskController = require('../controllers/TaskController')
 
-router.post('/novaTarefa',TaskController.novaTarefa)
+router.post('/novoLugar',TaskController.novoLugar)
 
-router.get('/tarefas',TaskController.listarTarefas)
+router.get('/lugares',TaskController.listarLugares)
 
-router.get('/tarefa/:id',TaskController.listarUmaTarefa)
+router.get('/lugar/:id',TaskController.listarUmLugar)
 
-router.put('/atualizar/tarefa/:id',TaskController.atualizarTarefa)
+router.put('/atualizar/lugar/:id',TaskController.atualizarLugar)
 
-router.delete('/delete/tarefa/:id',TaskController.removertarefa)
+router.delete('/delete/lugar/:id',TaskController.removerlugar)
 
 module.exports = router

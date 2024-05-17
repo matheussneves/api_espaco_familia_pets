@@ -1,58 +1,56 @@
 const database = require('../database/connection');
 
 class TaskController {
-    novaTarefa(request, response) {
+    novoLugar(request, response) {
         const {tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao } = request.body;
 
         console.log(tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao);
 
         database.table("tasks").insert({ tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao , Instagram, Avaliação }).then(data => {
             console.log(data);
-            response.json({ message: "Tarefa criada com sucesso!" });
+            response.json({ message: "Lugar criado com sucesso!" });
         }).catch(error => {
             console.log(error);
-            response.status(500).json({ error: "Ocorreu um erro ao criar a tarefa." });
+            response.status(500).json({ error: "Ocorreu um erro ao criar a lugar." });
         });
     };
 
-
-listarTarefas(request, response) {
-    database.select("*").table("tasks").then(tarefas => {
-        console.log(tarefas);
-        response.json(tarefas);
+    listarLugares(request, response) {
+    database.select("*").table("lugar").then(lugares => {
+        console.log(lugares);
+        response.json(lugares);
     }).catch(error => {
         console.log(error);
-        response.status(500).json({ error: "Ocorreu um erro ao buscar as tarefas." });
+        response.status(500).json({ error: "Ocorreu um erro ao buscar as lugares." });
     });
 };
 
-listarUmaTarefa(request,response){
+listarUmLugar(request,response){
     const id = request.params
-
-    database.select("*").table("tasks").where({id:id}).then(tarefa=>{
-        response.json(tarefa)
+    database.select("*").table("lugar").where({id:id}).then(lugar=>{
+        response.json(lugar)
     }).catch(error=>{
         console.log(error)
     })
 };
 
-atualizarTarefa(request,response){
+atualizarLugar(request,response){
     const id = request.params
     const {descricao} = request.body
 
-    database.where({id:id}).update({descricao:descricao}).table("tasks").then(data=>{
-        response.json({message:"Tarefa atualizar com sucesso"})
+    database.where({id:id}).update({descricao:descricao}).table("lugar").then(data=>{
+        response.json({message:"Lugar atualizado com sucesso"})
     }).catch(error=>{
         response.json(error)
 
     })
 };
 
-removertarefa(request,response){
+removerlugar(request,response){
     const id = request.paramns
 
-    database.where({id:id}).del().table("tasks").then(data=>{
-        response.json({message: "Tarefa removida com sucesso"})
+    database.where({id:id}).del().table("lugar").then(data=>{
+        response.json({message: "Lugar removido com sucesso"})
     }).catch(error=>{
         response.json(error)
     })
