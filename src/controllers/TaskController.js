@@ -13,8 +13,8 @@ class TaskController {
             console.log(error);
             response.status(500).json({ error: "Ocorreu um erro ao criar a tarefa." });
         });
-    }
-}
+    };
+
 
 listarTarefas(request, response) {
     database.select("*").table("tasks").then(tarefas => {
@@ -24,7 +24,7 @@ listarTarefas(request, response) {
         console.log(error);
         response.status(500).json({ error: "Ocorreu um erro ao buscar as tarefas." });
     });
-}
+};
 
 listarUmaTarefa(request,response){
     const id = request.params
@@ -34,12 +34,11 @@ listarUmaTarefa(request,response){
     }).catch(error=>{
         console.log(error)
     })
-}
+};
 
 atualizarTarefa(request,response){
     const id = request.params
     const {descricao} = request.body
-}
 
     database.where({id:id}).update({descricao:descricao}).table("tasks").then(data=>{
         response.json({message:"Tarefa atualizar com sucesso"})
@@ -47,14 +46,21 @@ atualizarTarefa(request,response){
         response.json(error)
 
     })
+};
 
-    removertarefa(request,response){
-        const id = request.paramns
+removertarefa(request,response){
+    const id = request.paramns
 
-        database.where({id:id}).del().table("tasks").then(data=>{
-            response.json({message: "Tarefa removida com sucesso"})
-        }).catch(error=>{
-            response.json(error)
-        })
-    }
+    database.where({id:id}).del().table("tasks").then(data=>{
+        response.json({message: "Tarefa removida com sucesso"})
+    }).catch(error=>{
+        response.json(error)
+    })
+}
+};
+    
+
+    
+
+
 module.exports = new TaskController()

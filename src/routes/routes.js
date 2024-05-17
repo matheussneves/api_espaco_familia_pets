@@ -11,6 +11,6 @@ router.get('/tarefa/:id',TaskController.listarUmaTarefa)
 
 router.put('/atualizar/tarefa/:id',TaskController.atualizarTarefa)
 
-router.delete('/delete/tarefa/:id',TaskController.removerTarefa)
+router.delete('/delete/tarefa/:id',TaskController.removertarefa)
 
 module.exports = router
