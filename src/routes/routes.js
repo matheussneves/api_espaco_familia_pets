@@ -1,7 +1,7 @@
 const connection = require ('../database/connection')
 const express = require ('express')
 const router = express.Router()
-const TaskController = require('../controllers/TaskController')
+const TaskController = require('../controllers/LugaresController')
 
 router.post('/novoLugar',TaskController.novoLugar)
 
