@@ -2,11 +2,11 @@ const database = require('../database/connection');
 
 class TaskController {
     novoLugar(request, response) {
-        const {nome ,tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao } = request.body;
+        const {id,nome,tipo_lugar,endereco,aceita_criancas,aceita_pets,espaco_pets,espaco_kids,banheiro_trocador,horario,instagram_link,avaliacao} = request.body;
 
-        console.log(nome,tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao);
+        console.log(id,nome,tipo_lugar,endereco,aceita_criancas,aceita_pets,espaco_pets,espaco_kids,banheiro_trocador,horario,instagram_link,avaliacao);
 
-        database.table("tasks").insert({ tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao , Instagram, Avaliação }).then(data => {
+        database.table("lugares").insert({ id,nome,tipo_lugar,endereco,aceita_criancas,aceita_pets,espaco_pets,espaco_kids,banheiro_trocador,horario,instagram_link,avaliacao }).then(data => {
             console.log(data);
             response.json({ message: "Lugar criado com sucesso!" });
         }).catch(error => {
@@ -16,8 +16,7 @@ class TaskController {
     };
 
 listarLugares(request, response) {
-    database.select("*").table("lugar").then(lugares => {
-        console.log(lugares);
+    database.select("*").table("vw_informacoes_lugares").then(lugares => {
         response.json(lugares);
     }).catch(error => {
         console.log(error);
@@ -27,7 +26,7 @@ listarLugares(request, response) {
 
 listarUmLugar(request,response){
     const id = request.params.id
-    database.select("*").table("lugar").where('id',id).then(lugar=>{
+    database.select("*").table("vw_informacoes_lugares").where('id',id).then(lugar=>{
         response.json(lugar)
     }).catch(error=>{
         console.log(error)
@@ -47,7 +46,7 @@ atualizarLugar(request,response){
     const id = request.params
     const {descricao} = request.body
 
-    database.where({id:id}).update({descricao:descricao}).table("lugar").then(data=>{
+    database.where({id:id}).update({descricao:descricao}).table("lugares").then(data=>{
         response.json({message:"Lugar atualizado com sucesso"})
     }).catch(error=>{
         response.json(error)
@@ -58,7 +57,7 @@ atualizarLugar(request,response){
 removerlugar(request,response){
     const id = request.paramns
 
-    database.where({id:id}).del().table("lugar").then(data=>{
+    database.where({id:id}).del().table("lugares").then(data=>{
         response.json({message: "Lugar removido com sucesso"})
     }).catch(error=>{
         response.json(error)
