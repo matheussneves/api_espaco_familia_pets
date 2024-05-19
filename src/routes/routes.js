@@ -9,6 +9,8 @@ router.get('/lugares',TaskController.listarLugares)
 
 router.get('/lugar/:id',TaskController.listarUmLugar)
 
+router.get('/imagensDoLugar/:id',TaskController.listarImagemPorLugarId)
+
 router.put('/atualizar/lugar/:id',TaskController.atualizarLugar)
 
 router.delete('/delete/lugar/:id',TaskController.removerlugar)

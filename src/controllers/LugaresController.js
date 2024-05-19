@@ -2,9 +2,9 @@ const database = require('../database/connection');
 
 class TaskController {
     novoLugar(request, response) {
-        const {tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao } = request.body;
+        const {nome ,tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao } = request.body;
 
-        console.log(tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao);
+        console.log(nome,tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao);
 
         database.table("tasks").insert({ tipoDeLugar, endereco, aceitaCriancas, aceitaPets, espaçoPets, espaçoKids, banheiroTrocador, horariodeFuncionamento, instagram, avaliacao , Instagram, Avaliação }).then(data => {
             console.log(data);
@@ -15,8 +15,7 @@ class TaskController {
         });
     };
 
-    listarLugares(request, response) {
-       // SELECT A.Nome, A.`Tipo De Lugar`,A.Endereço,A.`Aceita Crianças`,A.`Aceita pets`,A.`Espaço Pets`,A.`Espaço Kids`,A.`Banheiro trocador`,A.`Horario de funcionamento`,A.Instagram,A.Avaliação, B.url FROM novoevento_familia_pets.lugar A INNER JOIN novoevento_familia_pets.fotos B  ON A.id = B.id_lugares;
+listarLugares(request, response) {
     database.select("*").table("lugar").then(lugares => {
         console.log(lugares);
         response.json(lugares);
@@ -27,9 +26,18 @@ class TaskController {
 };
 
 listarUmLugar(request,response){
-    const id = request.params
-    database.select("*").table("lugar").where({id:id}).then(lugar=>{
+    const id = request.params.id
+    database.select("*").table("lugar").where('id',id).then(lugar=>{
         response.json(lugar)
+    }).catch(error=>{
+        console.log(error)
+    })
+};
+
+listarImagemPorLugarId(request,response){
+    const id = request.params.id
+    database.select("*").table("fotos").where('id_lugares',id).then(foto=>{
+        response.json(foto)
     }).catch(error=>{
         console.log(error)
     })
