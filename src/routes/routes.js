@@ -5,11 +5,7 @@ const TaskController = require('../controllers/LugaresController')
 
 router.post('/novoLugar',TaskController.novoLugar)
 
-router.get('/lugares',TaskController.listarLugares)
-
-router.get('/lugar/:id',TaskController.listarUmLugar)
-
-router.get('/imagensDoLugar/:id',TaskController.listarImagemPorLugarId)
+router.get('/lugar',TaskController.listarLugares)
 
 router.put('/atualizar/lugar/:id',TaskController.atualizarLugar)
 

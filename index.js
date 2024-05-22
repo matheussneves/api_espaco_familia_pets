@@ -5,7 +5,11 @@ const app = express();
 const porta = 8080
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({
+    verify: function (req, res, buf) {
+      req.rawBody = buf
+    }
+  }));
 app.use(router);
 
 app.get('/', (request, response) => {
