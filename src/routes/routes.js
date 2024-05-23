@@ -5,7 +5,8 @@ const TaskController = require('../controllers/LugaresController')
 
 router.post('/novoLugar',TaskController.novoLugar)
 
-router.get('/lugar',TaskController.listarLugares)
+router.get('/lugar/',TaskController.listarLugares)
+//:aceita_criancas/:aceita_pets/:espaco_pets/:espaco_kids/:banheiro_trocador/:tipo_lugar/:nome'
 
 router.put('/atualizar/lugar/:id',TaskController.atualizarLugar)
 
