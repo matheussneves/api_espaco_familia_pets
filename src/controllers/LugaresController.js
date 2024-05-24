@@ -15,44 +15,38 @@ class TaskController {
     };
 
 listarLugares(request, response) {
-    console.log(request.query)
     const where = {};
     if (request.query.aceita_criancas == "S") {where.aceita_criancas = "Sim"} else if (request.query.aceita_criancas == "N") {where.aceita_criancas = "Não"}
     if (request.query.aceita_pets == "S") {where.aceita_pets = "Sim"} else if (request.query.aceita_pets == "N") {where.aceita_pets = "Não"}
     if (request.query.espaco_pets == "S") {where.espaco_pets = "Sim"} else if (request.query.espaco_pets == "N") {where.espaco_pets = "Não"}
     if (request.query.espaco_kids == "S") {where.espaco_kids = "Sim"} else if (request.query.espaco_kids == "N") {where.espaco_kids = "Não"}
     if (request.query.banheiro_trocador == "S") {where.banheiro_trocador = "Sim"} else if (request.query.banheiro_trocador == "N") {where.banheiro_trocador = "Não"}
-    if (request.query.toString() == {}){
-        console.log("tudo")
+    if (request.query.toString() == '{}'){
         database.select("*").table("vw_informacoes_lugares").then(lugar=>{response.json(lugar.map((item) => ({ ...item, imagens: item.imagens.split(',') })))
     }).catch(error=>{
         console.log({error})
         response.json({error})
     })
-    } else if (request.query.nome == '' && request.query.tipo_lugar == '' ) {
-        console.log(3)
+    } else if (request.query.nome == undefined && request.query.tipo_lugar == undefined ) {
         database.select("*").table("vw_informacoes_lugares").where(where).then(lugar=>{response.json(lugar.map((item) => ({ ...item, imagens: item.imagens.split(',') })))
     }).catch(error=>{
         console.log({error})
         response.json({error})
     })
-    } else if(request.query.nome == ''  && !request.query.tipo_lugar == '' ){
-        console.log(1)
+    } else if(request.query.nome ==  undefined  && !request.query.tipo_lugar == undefined ){
     database.select("*").table("vw_informacoes_lugares").where(where).whereILike('tipo_lugar', `%${request.query.tipo_lugar }%`).then(lugar=>{response.json(lugar.map((item) => ({ ...item, imagens: item.imagens.split(',') })))
     }).catch(error=>{
         console.log({error})
         response.json({error})
     })
-    } else if (request.query.tipo_lugar == '' && !request.query.nome == '') {
-        console.log(2)
+    } else if (request.query.tipo_lugar == undefined && !request.query.nome == undefined) {
         database.select("*").table("vw_informacoes_lugares").where(where).WhereILike('nome', `%${request.query.nome}%`).then(lugar=>{response.json(lugar.map((item) => ({ ...item, imagens: item.imagens.split(',') })))
     }).catch(error=>{
         console.log({error})
         response.json({error})
     })
     }  else  {
-        console.log(4)
-        database.select("*").table("vw_informacoes_lugares").where(where).whereILike('tipo_lugar', `%${request.query.tipo_lugar }%`).orWhereILike('nome', `%${request.query.nome}%`).then(lugar=>{response.json(lugar.map((item) => ({ ...item, imagens: item.imagens.split(',') })))
+        database.select("*").table("vw_informacoes_lugares").where(where).whereILike('tipo_lugar', `%${request.query.tipo_lugar}%`).orWhereILike('nome', `%${request.query.nome}%`).then(lugar=>{response.json(lugar.map((item) => ({ ...item, imagens: item.imagens.split(',') })))
     }).catch(error=>{
         console.log({error})
         response.json({error})
